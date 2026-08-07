@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K. Ibrahim — Data Visualisation Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EB;
+    --paper-alt:#E9E7DD;
+    --ink:#1A1D22;
+    --ink-soft:#5B5F67;
+    --grid:#D9D7CB;
+    --teal:#2B6157;
+    --teal-soft:#E4EBE8;
+    --gold:#C98A2C;
+    --gold-soft:#F3E7D2;
+    --radius:10px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:32px 32px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:880px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---- Header ---- */
+  header.site{
+    padding:28px 0 20px;
+  }
+  .site-header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .wordmark{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.1rem;
+    letter-spacing:-0.01em;
+  }
+  .site-nav{
+    display:flex;
+    gap:20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  .site-nav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible{
+    color:var(--ink);
+    border-bottom-color:var(--teal);
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:36px 0 8px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(2rem, 5vw, 3rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 18px;
+    max-width:11ch;
+  }
+  .lede{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:0 0 36px;
+  }
+
+  /* ---- Signature chart ---- */
+  .chart-card{
+    background:var(--paper-alt);
+    border:1px solid var(--grid);
+    border-radius:var(--radius);
+    padding:20px 20px 12px;
+    margin-bottom:44px;
+  }
+  .chart-caption{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    letter-spacing:0.03em;
+    margin-top:6px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .chart-caption strong{
+    color:var(--ink);
+    font-weight:500;
+  }
+  svg.progress-chart{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+  .today-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    fill:var(--gold);
+  }
+  .axis-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    fill:var(--ink-soft);
+  }
+
+  /* ---- About ---- */
+  .about{
+    padding:8px 0 44px;
+    max-width:56ch;
+  }
+  .about h2, .entries h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.3rem;
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  .about p{
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---- Entries / timeline ---- */
+  .entries{
+    padding:8px 0 60px;
+  }
+  .entry-list{
+    border-top:1px solid var(--grid);
+  }
+  .entry{
+    display:grid;
+    grid-template-columns:64px 1fr auto;
+    align-items:center;
+    gap:16px;
+    padding:16px 4px;
+    border-bottom:1px solid var(--grid);
+    text-decoration:none;
+    color:inherit;
+  }
+  .entry.is-open:hover, .entry.is-open:focus-visible{
+    background:var(--paper-alt);
+  }
+  .entry-week{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .entry-module{
+    font-weight:500;
+  }
+  .entry-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .status-published{
+    background:var(--teal-soft);
+    color:var(--teal);
+  }
+  .status-pending{
+    background:transparent;
+    color:var(--ink-soft);
+    border:1px solid var(--grid);
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    padding:32px 0 48px;
+    border-top:1px solid var(--grid);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  footer a{
+    text-decoration:underline;
+    text-decoration-color:var(--grid);
+    text-underline-offset:3px;
+  }
+  footer a:hover, footer a:focus-visible{
+    color:var(--ink);
+    text-decoration-color:var(--teal);
+  }
+
+  @media (max-width:520px){
+    .entry{grid-template-columns:48px 1fr; row-gap:6px;}
+    .entry-status{grid-column:1 / -1; justify-self:start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-header-inner">
+    <div class="wordmark">K. Ibrahim</div>
+    <nav class="site-nav">
+      <a href="#about">About</a>
+      <a href="#entries">Journal</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">MATH2237 · Data Visualisation · RMIT · Sem 2 2026</div>
+    <h1>Encoding a semester, one plot at a time.</h1>
+    <p class="lede">A running record of what I'm learning about turning data into things people can actually see and understand — starting with a pencil and graph paper, ending somewhere more interactive.</p>
+
+    <div class="chart-card">
+      <svg class="progress-chart" viewBox="0 0 640 200" role="img" aria-label="Line chart showing portfolio progress across the semester, rising from Week 1, with a solid line up to the current week and a dashed projected line continuing to Week 16">
+        <!-- axes -->
+        <line x1="40" y1="16" x2="40" y2="164" stroke="#D9D7CB" stroke-width="1"/>
+        <line x1="40" y1="164" x2="600" y2="164" stroke="#D9D7CB" stroke-width="1"/>
+
+        <!-- x ticks -->
+        <text x="40" y="182" class="axis-label" text-anchor="middle">W1</text>
+        <text x="226" y="182" class="axis-label" text-anchor="middle">W6</text>
+        <text x="413" y="182" class="axis-label" text-anchor="middle">W12</text>
+        <text x="600" y="182" class="axis-label" text-anchor="middle">W16</text>
+
+        <!-- today guide -->
+        <line x1="115" y1="16" x2="115" y2="164" stroke="#C98A2C" stroke-width="1" stroke-dasharray="3 4"/>
+        <text x="119" y="28" class="today-label">week 3 · today</text>
+
+        <!-- solid line: known progress -->
+        <polyline points="40,150 78,138 115,124" fill="none" stroke="#2B6157" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="40" cy="150" r="3.5" fill="#2B6157"/>
+        <circle cx="78" cy="138" r="3.5" fill="#2B6157"/>
+        <circle cx="115" cy="124" r="4" fill="#2B6157"/>
+
+        <!-- dashed line: projected -->
+        <polyline points="115,124 226,101 338,78 469,52 600,30" fill="none" stroke="#2B6157" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 7" opacity="0.55"/>
+      </svg>
+      <div class="chart-caption">
+        <span><strong>Solid</strong> — submitted work</span>
+        <span><strong>Dashed</strong> — projected, not yet measured</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about wrap">
+    <h2>About this journal</h2>
+    <p>I'm a student in MATH2237 at RMIT, and this site is where I'll be publishing each portfolio exercise as I go — from the very first hand-drawn plot through to interactive dashboards later in the semester. Every entry links back to the module it came from, along with what I made and what I'd do differently next time.</p>
+  </section>
+
+  <section id="entries" class="entries wrap">
+    <h2>Journal entries</h2>
+    <div class="entry-list">
+
+      <a class="entry is-open" href="posts/module-1.html">
+        <span class="entry-week">WK 01</span>
+        <span class="entry-module">Foundations — hand-drawn visualisation</span>
+        <span class="entry-status status-published">Published</span>
+      </a>
+
+      <a class="entry is-open" href="posts/module-2.html">
+        <span class="entry-week">WK 02</span>
+        <span class="entry-module">Perception — Gestalt &amp; preattentive analysis</span>
+        <span class="entry-status status-published">Published</span>
+      </a>
+
+      <div class="entry">
+        <span class="entry-week">WK 03</span>
+        <span class="entry-module">Data</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 04</span>
+        <span class="entry-module">Grammar</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 05</span>
+        <span class="entry-module">Colour</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 06</span>
+        <span class="entry-module">Publication and accessibility</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 07</span>
+        <span class="entry-module">Multivariate strategies</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 08</span>
+        <span class="entry-module">Spatial data</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 09</span>
+        <span class="entry-module">Interactivity Part I</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 10</span>
+        <span class="entry-module">Interactivity Part II</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 11</span>
+        <span class="entry-module">Combining plots</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+      <div class="entry">
+        <span class="entry-week">WK 12</span>
+        <span class="entry-module">Revision</span>
+        <span class="entry-status status-pending">Coming soon</span>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 K. Ibrahim</span>
+  <span>Get in touch via <a href="#">LinkedIn</a> or the <a href="#">contact form</a> — replace these links with your own.</span>
+</footer>
+
+</body>
+</html>
