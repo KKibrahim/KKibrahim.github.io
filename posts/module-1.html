@@ -1,30 +1,99 @@
-K. Ibrahim
-← Journal
-Module 1 · Foundations
-Draw it like Playfair, Minard and Nightingale
-7 August 2026
-About this piece
-[Write 2-3 sentences here explaining why you chose to replicate this visualisation, and what it shows.]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — Draw it like Playfair, Minard and Nightingale | K. Ibrahim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EB; --paper-alt:#E9E7DD; --ink:#1A1D22; --ink-soft:#5B5F67;
+    --grid:#D9D7CB; --teal:#2B6157; --teal-soft:#E4EBE8; --gold:#C98A2C; --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:32px 32px; color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  header.site{padding:28px 0 20px;}
+  .site-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .wordmark{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.1rem;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-decoration:none; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;}
+  .back-link:hover{color:var(--teal);}
+  .post-header{padding:20px 0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;}
+  h1{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); line-height:1.12; margin:0 0 10px;}
+  .date{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-soft);}
+  h2{font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:600; margin:44px 0 14px;}
+  p{margin:0 0 14px;}
+  .placeholder{color:#A99; font-style:italic; background:var(--paper-alt); border:1px dashed var(--grid); border-radius:6px; padding:12px 14px;}
+  figure{margin:0 0 20px;}
+  figure img{width:100%; max-width:420px; display:block; border-radius:6px; border:1px solid var(--grid);}
+  figcaption{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--ink-soft); margin-top:6px;}
+  .stage-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px; margin-bottom:20px;}
+  .stage-grid img{width:100%; border-radius:6px; border:1px solid var(--grid);}
+  .final-fig img{max-width:340px;}
+  .refs{font-size:0.92rem; color:var(--ink-soft);}
+  .refs a{color:var(--teal);}
+  footer{padding:32px 0 48px; border-top:1px solid var(--grid); margin-top:20px; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
 
-The process
-Drawn by hand in GoodNotes on iPad with Apple Pencil, working from graph paper templates.
+<header class="site">
+  <div class="wrap site-header-inner">
+    <div class="wordmark">K. Ibrahim</div>
+    <a class="back-link" href="../index.html">&larr; Journal</a>
+  </div>
+</header>
 
-Stage 1 of the drawing process
-Stage 1 — axes and scale set up
-Stage 3 of the drawing process
-Stage 3 — trend line added
-Stage 5 of the drawing process
-Stage 5 — line completed
-Final visualisation
-Final hand-drawn chart of the NSW murder rate, 1990-2014
-Final, labelled version
-Reflection
-Redrawing the graph of murder rate of NSW using hand has revealed the mechanics of achieving visual accuracy in drawing. Even though I was able to spot a typing error in the axis label in the process of drawing ($0,000 to 100,000 population) and could successfully replicate the linear trendline from the original graph, the free-hand nature of the drawing led to some line irregularities and difficulty in ensuring even spacing of the 28 years in the x-axis. Given some time, I would have ensured that the horizontal scale is drawn on a grid paper and use a straight edge ruler prior to drawing the axes.
+<main class="wrap">
+  <div class="post-header">
+    <div class="eyebrow">Module 1 &middot; Foundations</div>
+    <h1>Draw it like Playfair, Minard and Nightingale</h1>
+    <div class="date">7 August 2026</div>
+  </div>
 
-Original visualisation
-Original published chart: Murder rate for NSW, 1990-2017
-Source: Sydney Criminal Lawyers (2022)
-Reference
-Sydney Criminal Lawyers. (2022, December 20). All NSW crime categories are in decline, except one. https://www.sydneycriminallawyers.com.au/blog/all-nsw-crime-categories-are-in-decline-except-one/
+  <h2>About this piece</h2>
+  <p class="placeholder">[Write 2-3 sentences here explaining why you chose to replicate this visualisation, and what it shows.]</p>
 
-© 2026 K. Ibrahim · MATH2237, RMIT
+  <h2>The process</h2>
+  <p>Drawn by hand in GoodNotes on iPad with Apple Pencil, working from graph paper templates.</p>
+  <div class="stage-grid">
+    <figure><img src="img/stage1.png" alt="Stage 1 of the drawing process"><figcaption>Stage 1 — axes and scale set up</figcaption></figure>
+    <figure><img src="img/stage2.png" alt="Stage 2 of the drawing process"><figcaption>Stage 2 — plotting begins</figcaption></figure>
+    <figure><img src="img/stage3.png" alt="Stage 3 of the drawing process"><figcaption>Stage 3 — trend line added</figcaption></figure>
+    <figure><img src="img/stage4.png" alt="Stage 4 of the drawing process"><figcaption>Stage 4 — nearing completion</figcaption></figure>
+    <figure><img src="img/stage5.png" alt="Stage 5 of the drawing process"><figcaption>Stage 5 — line completed</figcaption></figure>
+  </div>
+
+  <h2>Final visualisation</h2>
+  <figure class="final-fig">
+    <img src="img/final_drawing.jpg" alt="Final hand-drawn chart of the NSW murder rate, 1990-2014">
+    <figcaption>Final, labelled version</figcaption>
+  </figure>
+
+  <h2>Reflection</h2>
+  <p>Redrawing the graph of murder rate of NSW using hand has revealed the mechanics of achieving visual accuracy in drawing. Even though I was able to spot a typing error in the axis label in the process of drawing ($0,000 to 100,000 population) and could successfully replicate the linear trendline from the original graph, the free-hand nature of the drawing led to some line irregularities and difficulty in ensuring even spacing of the 28 years in the x-axis. Given some time, I would have ensured that the horizontal scale is drawn on a grid paper and use a straight edge ruler prior to drawing the axes.</p>
+
+  <h2>Original visualisation</h2>
+  <figure>
+    <img src="img/orig_nsw.png" alt="Original published chart: Murder rate for NSW, 1990-2017">
+    <figcaption>Source: Sydney Criminal Lawyers (2022)</figcaption>
+  </figure>
+
+  <h2>Reference</h2>
+  <p class="refs">Sydney Criminal Lawyers. (2022, December 20). All NSW crime categories are in decline, except one. <a href="https://www.sydneycriminallawyers.com.au/blog/all-nsw-crime-categories-are-in-decline-except-one/">https://www.sydneycriminallawyers.com.au/blog/all-nsw-crime-categories-are-in-decline-except-one/</a></p>
+</main>
+
+<footer class="wrap">
+  <span>&copy; 2026 K. Ibrahim &middot; MATH2237, RMIT</span>
+</footer>
+
+</body>
+</html>
