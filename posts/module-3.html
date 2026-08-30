@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — Data in Data Visualisation | K. Ibrahim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EB; --paper-alt:#E9E7DD; --ink:#1A1D22; --ink-soft:#5B5F67;
+    --grid:#D9D7CB; --teal:#2B6157; --teal-soft:#E4EBE8; --gold:#C98A2C; --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:32px 32px; color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  header.site{padding:28px 0 20px;}
+  .site-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .wordmark{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.1rem;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-decoration:none; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;}
+  .back-link:hover{color:var(--teal);}
+  .post-header{padding:20px 0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;}
+  h1{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); line-height:1.12; margin:0 0 10px;}
+  .date{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-soft);}
+  h2{font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:600; margin:44px 0 14px;}
+  h3{font-family:'Space Grotesk', sans-serif; font-size:1rem; font-weight:600; margin:26px 0 8px;}
+  p{margin:0 0 14px;}
+  .placeholder{color:#A99; font-style:italic; background:var(--paper-alt); border:1px dashed var(--grid); border-radius:6px; padding:12px 14px;}
+  figure{margin:0 0 20px;}
+  figure img{width:100%; max-width:520px; display:block; border-radius:6px; border:1px solid var(--grid);}
+  figcaption{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--ink-soft); margin-top:6px;}
+  table{width:100%; border-collapse:collapse; margin:0 0 20px; font-size:0.92rem;}
+  th, td{border:1px solid var(--grid); padding:8px 10px; text-align:left;}
+  th{background:var(--teal-soft); font-family:'Space Grotesk', sans-serif; font-weight:600;}
+  .refs{font-size:0.92rem; color:var(--ink-soft);}
+  .refs a{color:var(--teal);}
+  footer{padding:32px 0 48px; border-top:1px solid var(--grid); margin-top:20px; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-header-inner">
+    <div class="wordmark">K. Ibrahim</div>
+    <a class="back-link" href="../index.html">&larr; Journal</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-header">
+    <div class="eyebrow">Module 3 &middot; Data</div>
+    <h1>Verifying data integrity in a published visualisation</h1>
+    <div class="date">Week 3</div>
+  </div>
+
+  <h2>About this exercise</h2>
+  <p class="placeholder">[Summarise the exercise objective in your own words — e.g. "this exercise asked me to choose a published data visualisation, trace its underlying data back to the original source, and verify whether the visualised values were accurate."]</p>
+
+  <h2>Chosen visualisation</h2>
+  <figure>
+    <img src="img/mod3_chart.png" alt="Each State's Main Import Partner, by HowMuch.net">
+    <figcaption>HowMuch.net (2021) — see reference below</figcaption>
+  </figure>
+
+  <h3>1. Original data source</h3>
+  <p>The visualisation's underlying data was traced to the U.S. Census Bureau's state-level import statistics (Imports, State of Destination), published as part of their Foreign Trade data series.</p>
+
+  <h3>2. Variables visualised</h3>
+  <table>
+    <tr><th>Variable</th><th>Unit</th><th>Level of measurement</th></tr>
+    <tr><td>Import partner country</td><td>—</td><td>Nominal</td></tr>
+    <tr><td>Import value</td><td>USD ($)</td><td>Ratio</td></tr>
+    <tr><td>% of total state imports</td><td>Percent (%)</td><td>Ratio</td></tr>
+  </table>
+
+  <h3>3. Data&ndash;question alignment (Junk Charts Trifecta)</h3>
+  <p>The implied question (Q) behind this visualisation is: "Who does each U.S. state import the most from, and how dominant is that partner?" The data used aligns well with this question, as it directly identifies each state's main import partner and shows both the dollar value and percentage share of imports coming from that partner. According to the Junk Charts Trifecta Checkup framework, strong D&ndash;Q alignment exists when the data measures what the question asks, and here the two match closely. However, the visualisation only shows the single largest partner for each state, rather than the full distribution of all trading partners. This means the data answers "who is the biggest partner" well, but cannot show how concentrated or diversified a state's overall import portfolio is &mdash; a limitation of scope rather than a flaw in the underlying data.</p>
+
+  <h3>4. Verification of values</h3>
+  <table>
+    <tr><th>State</th><th>HowMuch.net value</th><th>Census Bureau value</th><th>Discrepancy?</th></tr>
+    <tr><td>Montana (Canada)</td><td>87%, $3.4B</td><td>87.002%, $3,431,823,908</td><td>Negligible &mdash; rounding only</td></tr>
+  </table>
+  <p>To verify the accuracy of the original visualisation, I selected Montana as a data point, since it showed the highest single-partner dependency on the map (87% of imports from Canada). Using the U.S. Census Bureau's USA Trade Online tool, I retrieved the 2020 import figures for Montana: total imports from Canada were $3,431,823,908, against total state imports of $3,944,504,775, giving a calculated share of 87.002%. This matches HowMuch.net's reported figures of 87% and $3.4 billion almost exactly, with the tiny difference attributable to rounding rather than any error. Based on this verification, I am confident the original visualisation accurately represents the underlying Census Bureau data, at least for the data point checked.</p>
+
+  <h3>5. Source quality &amp; limitations</h3>
+  <p>The United States Census Bureau is an authoritative and credible source of information about U.S. trade statistics due to its role as the official U.S. government agency charged with collecting and disseminating such data. While the data has a few strengths, there are also several limitations. One limitation of the data is that foreign trade zone (FTZ) shipments are included in state totals. A second limitation is that the state of destination measure may not accurately reflect the actual location of consumption/usage of imported goods. Finally, the data presented in this visualisation is not seasonally adjusted; therefore, users must consider the impact of seasonal variations on their interpretation of the data.</p>
+
+  <h2>Reference</h2>
+  <p class="refs">HowMuch.net. (2021, June 2). Each state's main import partner. <a href="https://howmuch.net/articles/each-states-main-import-partner">https://howmuch.net/articles/each-states-main-import-partner</a></p>
+  <p class="refs">U.S. Census Bureau. (2021). Imports, state of destination [Data set]. <a href="https://www.census.gov/foreign-trade/statistics/state/data/imports/index.html">https://www.census.gov/foreign-trade/statistics/state/data/imports/index.html</a></p>
+</main>
+
+<footer class="wrap">
+  <span>&copy; 2026 K. Ibrahim &middot; MATH2237, RMIT</span>
+</footer>
+
+</body>
+</html>
