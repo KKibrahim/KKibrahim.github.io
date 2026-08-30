@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Grammar in Data Visualisation | K. Ibrahim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EB; --paper-alt:#E9E7DD; --ink:#1A1D22; --ink-soft:#5B5F67;
+    --grid:#D9D7CB; --teal:#2B6157; --teal-soft:#E4EBE8; --gold:#C98A2C; --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:32px 32px; color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  header.site{padding:28px 0 20px;}
+  .site-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .wordmark{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.1rem;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-decoration:none; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;}
+  .back-link:hover{color:var(--teal);}
+  .post-header{padding:20px 0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;}
+  h1{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); line-height:1.12; margin:0 0 10px;}
+  .date{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-soft);}
+  h2{font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:600; margin:44px 0 14px;}
+  h3{font-family:'Space Grotesk', sans-serif; font-size:1rem; font-weight:600; margin:26px 0 8px;}
+  p{margin:0 0 14px;}
+  .placeholder{color:#A99; font-style:italic; background:var(--paper-alt); border:1px dashed var(--grid); border-radius:6px; padding:12px 14px;}
+  figure{margin:0 0 20px;}
+  figure img{width:100%; max-width:480px; display:block; border-radius:6px; border:1px solid var(--grid);}
+  figcaption{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--ink-soft); margin-top:6px;}
+  .refs{font-size:0.92rem; color:var(--ink-soft);}
+  .refs a{color:var(--teal);}
+  footer{padding:32px 0 48px; border-top:1px solid var(--grid); margin-top:20px; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-header-inner">
+    <div class="wordmark">K. Ibrahim</div>
+    <a class="back-link" href="../index.html">&larr; Journal</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-header">
+    <div class="eyebrow">Module 4 &middot; Grammar</div>
+    <h1>Deconstructing the layered grammar of graphics</h1>
+    <div class="date">Week 4</div>
+  </div>
+
+  <h2>About this exercise</h2>
+  <p class="placeholder">[Summarise the exercise objective in your own words — e.g. "this exercise asked me to pick a published chart and break it down using Wickham's layered grammar of graphics, identifying its data, geoms, aesthetics, statistical transformations, scales, position adjustments, coordinate system, and faceting."]</p>
+
+  <h2>Chosen visualisation</h2>
+  <figure>
+    <img src="img/mod4_chart.png" alt="Income share of the richest 10% and richest 0.1% of the population in each country, by Our World in Data">
+    <figcaption>Our World in Data (2026) — see reference below</figcaption>
+  </figure>
+
+  <h3>1. Data</h3>
+  <p>The chart uses data from the World Inequality Database, based on 2022 income data. It shows the income share received by the richest 10% and richest 0.1% in seven South American countries.</p>
+
+  <h3>2. Geoms</h3>
+  <p>The main geometric shape is horizontal bars. Each country has two bars representing the two income groups.</p>
+
+  <h3>3. Aesthetics (aes)</h3>
+  <p>Country is the categorical variable, while income share (%) determines the length of each bar. Colour distinguishes the richest 10% (teal) from the richest 0.1% (navy).</p>
+
+  <h3>4. Statistical transformation</h3>
+  <p>The percentages shown are income-share measures, which are already calculated from the underlying income data &mdash; this transformation (aggregating total income earned by a percentile group, then dividing by total income in the country) happens upstream in the data itself rather than being computed live by the visualisation. There does not appear to be an additional statistical transformation applied by the chart's plotting layer.</p>
+
+  <h3>5. Scale</h3>
+  <p>The teal colour represents the richest 10%, while the navy colour represents the richest 0.1%. The bar lengths are measured using a percentage scale showing each group's share of total income.</p>
+
+  <h3>6. Position adjustment</h3>
+  <p>The two sets of bars are arranged side-by-side on opposite sides of a central line, with the richest 10% extending to the left and the richest 0.1% extending to the right. This is a mirrored arrangement rather than a standard dodged bar chart.</p>
+
+  <h3>7. Coordinate system &amp; faceting</h3>
+  <p>The visualisation uses a standard Cartesian coordinate system. Although the two sides may look like separate panels, they are not technically two facets; the bars are part of one combined chart with the countries listed along the centre. There is no formal faceting used.</p>
+
+  <h2>Reference</h2>
+  <p class="refs">Our World in Data. (2026). Income share of the richest 10% and the richest 0.1% of the population in each country [Data source: World Inequality Database]. <a href="https://ourworldindata.org/data-insights/what-is-the-most-unequal-country-in-south-america-it-depends-on-what-metric-you-look-at">https://ourworldindata.org/data-insights/what-is-the-most-unequal-country-in-south-america-it-depends-on-what-metric-you-look-at</a></p>
+</main>
+
+<footer class="wrap">
+  <span>&copy; 2026 K. Ibrahim &middot; MATH2237, RMIT</span>
+</footer>
+
+</body>
+</html>
