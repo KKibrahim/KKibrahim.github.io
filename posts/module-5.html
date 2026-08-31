@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Colour in Data Visualisation | K. Ibrahim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EB; --paper-alt:#E9E7DD; --ink:#1A1D22; --ink-soft:#5B5F67;
+    --grid:#D9D7CB; --teal:#2B6157; --teal-soft:#E4EBE8; --gold:#C98A2C; --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:32px 32px; color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+  header.site{padding:28px 0 20px;}
+  .site-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .wordmark{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.1rem;}
+  .back-link{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-decoration:none; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;}
+  .back-link:hover{color:var(--teal);}
+  .post-header{padding:20px 0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;}
+  h1{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(1.7rem, 4vw, 2.4rem); line-height:1.12; margin:0 0 10px;}
+  .date{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-soft);}
+  h2{font-family:'Space Grotesk', sans-serif; font-size:1.15rem; font-weight:600; margin:44px 0 14px;}
+  h3{font-family:'Space Grotesk', sans-serif; font-size:1rem; font-weight:600; margin:26px 0 8px;}
+  p{margin:0 0 14px;}
+  .placeholder{color:#A99; font-style:italic; background:var(--paper-alt); border:1px dashed var(--grid); border-radius:6px; padding:12px 14px;}
+  figure{margin:0 0 20px;}
+  figure img{width:100%; max-width:640px; display:block; border-radius:6px; border:1px solid var(--grid);}
+  figcaption{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--ink-soft); margin-top:6px;}
+  .figure-pair{display:flex; gap:16px; flex-wrap:wrap; margin:0 0 20px;}
+  .figure-pair figure{flex:1 1 260px; margin:0;}
+  .figure-pair img{max-width:100%;}
+  table{width:100%; border-collapse:collapse; margin:0 0 20px; font-size:0.9rem;}
+  th, td{border:1px solid var(--grid); padding:10px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--teal-soft); font-family:'Space Grotesk', sans-serif; font-weight:600; width:140px;}
+  .refs{font-size:0.92rem; color:var(--ink-soft);}
+  .refs a{color:var(--teal);}
+  footer{padding:32px 0 48px; border-top:1px solid var(--grid); margin-top:20px; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-header-inner">
+    <div class="wordmark">K. Ibrahim</div>
+    <a class="back-link" href="../index.html">&larr; Journal</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-header">
+    <div class="eyebrow">Module 5 &middot; Colour</div>
+    <h1>Copy the master, then recolour it</h1>
+    <div class="date">Week 5</div>
+  </div>
+
+  <h2>About this exercise</h2>
+  <p class="placeholder">[Summarise the exercise objective in your own words — e.g. "this exercise asked me to find a data visualisation made by a skilled designer, recreate it using my own tool, and then produce an alternative colour scale that follows responsible colour-use guidelines."]</p>
+
+  <h2>The master visualisation</h2>
+  <figure>
+    <img src="img/mod5_master.png" alt="Battling Infectious Diseases in the 20th Century: The Impact of Vaccines, by DeBold &amp; Friedman, Wall Street Journal">
+    <figcaption>DeBold &amp; Friedman (2015), The Wall Street Journal &mdash; see reference below</figcaption>
+  </figure>
+  <p>The recreated visualisation is a heatmap showing annual measles case counts across U.S. states from approximately 1928 to 2002. It shows much higher numbers of measles cases before 1963, followed by a sharp decline after the introduction of the measles vaccine, marked by a dashed vertical line. The visualisation was recreated in R using ggplot2 and includes both the original-style yellow-to-red colour scheme and a colour-blind-safe viridis version.</p>
+
+  <h2>My recreation &amp; recolour</h2>
+  <div class="figure-pair">
+    <figure>
+      <img src="img/mod5_recreation.png" alt="Recreation of the measles heatmap using the original yellow-to-red colour scale">
+      <figcaption>Recreation &mdash; original yellow&ndash;red scale</figcaption>
+    </figure>
+    <figure>
+      <img src="img/mod5_recolour.png" alt="Recoloured measles heatmap using the viridis colour-blind-safe palette">
+      <figcaption>Recolour &mdash; viridis palette</figcaption>
+    </figure>
+  </div>
+
+  <h3>Why viridis?</h3>
+  <p>I chose the viridis colour scale because it provides a more accessible and responsible alternative to the original yellow-to-red scale. Yellow-to-red colour gradients can be difficult for some people with colour-vision deficiencies to distinguish clearly, and differences between colours may not correspond consistently to differences in the underlying data. Viridis is designed to be colour-blind-safe and perceptually uniform, meaning that equal changes in the data are represented by approximately equal visual changes in colour. It also remains interpretable when converted to greyscale, making the visualisation more accessible and consistent with responsible data visualisation principles.</p>
+
+  <h2>Data card</h2>
+  <table>
+    <tr><th>Title</th><td>Battling Infectious Diseases in the 20th Century: The Impact of Vaccines (Measles heatmap) &mdash; recreated by K. Ibrahim</td></tr>
+    <tr><th>Summary</th><td>The recreated visualisation is a heatmap showing annual measles case counts across U.S. states from approximately 1928 to 2002. It shows much higher numbers of measles cases before 1963, followed by a sharp decline after the introduction of the measles vaccine, marked by a dashed vertical line. The visualisation was recreated in R using ggplot2 and includes both the original-style yellow-to-red colour scheme and a colour-blind-safe viridis version.</td></tr>
+    <tr><th>Data Sources</th><td>Van Panhuis, W., Cross, A., &amp; Burke, D. (2018). Counts of Measles reported in United States of America: 1888-2002 (Version 2.0) [Data set]. Project Tycho. <a href="https://doi.org/10.25337/T7/ptycho.v2.0/US.14189004">https://doi.org/10.25337/T7/ptycho.v2.0/US.14189004</a><br><br>Original visualisation reference: DeBold, T., &amp; Friedman, D. (2015, February 11). Battling infectious diseases in the 20th century: The impact of vaccines. The Wall Street Journal. <a href="https://graphics.wsj.com/infectious-diseases-and-vaccines/">https://graphics.wsj.com/infectious-diseases-and-vaccines/</a></td></tr>
+    <tr><th>Mapping</th><td>X-axis: Year &mdash; weekly measles case counts aggregated to annual totals, approximately 1928&ndash;2002 (Van Panhuis et al., 2018)<br>Y-axis: U.S. state &mdash; using the Admin1Name field (Van Panhuis et al., 2018)<br>Colour: Annual measles case count per state &mdash; sequential colour scale (Van Panhuis et al., 2018)</td></tr>
+    <tr><th>Important Notes</th><td>The original weekly measles counts were preprocessed by aggregating all available weekly observations into annual totals for each U.S. state. The recreated heatmap uses raw case counts rather than population-adjusted rates per 100,000 people, so differences between states may partly reflect differences in population size. Missing or incomplete weekly observations can affect annual totals, meaning some state-year values may represent incomplete reporting rather than zero cases. An unusually large value was also observed around 1963; because it appeared suspiciously high compared with surrounding observations, it was treated as a possible data-quality artifact rather than being assumed to represent a confirmed real spike. The Project Tycho data are provided under the Creative Commons Attribution 4.0 International (CC BY 4.0) licence, which allows reuse with appropriate attribution.</td></tr>
+    <tr><th>Access</th><td>You can get a copy of the data used to build this visualisation by downloading it from Project Tycho via Zenodo: <a href="https://zenodo.org/records/1289771">https://zenodo.org/records/1289771</a> (Van Panhuis et al., 2018)</td></tr>
+  </table>
+
+  <h2>References</h2>
+  <p class="refs">DeBold, T., &amp; Friedman, D. (2015, February 11). Battling infectious diseases in the 20th century: The impact of vaccines. The Wall Street Journal. <a href="https://graphics.wsj.com/infectious-diseases-and-vaccines/">https://graphics.wsj.com/infectious-diseases-and-vaccines/</a></p>
+  <p class="refs">Van Panhuis, W., Cross, A., &amp; Burke, D. (2018). Counts of Measles reported in United States of America: 1888-2002 (Version 2.0) [Data set]. Project Tycho. <a href="https://doi.org/10.25337/T7/ptycho.v2.0/US.14189004">https://doi.org/10.25337/T7/ptycho.v2.0/US.14189004</a></p>
+</main>
+
+<footer class="wrap">
+  <span>&copy; 2026 K. Ibrahim &middot; MATH2237, RMIT</span>
+</footer>
+
+</body>
+</html>
