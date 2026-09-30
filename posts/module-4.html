@@ -83,10 +83,10 @@
   <p>The teal colour represents the richest 10%, while the navy colour represents the richest 0.1%. The bar lengths are measured using a percentage scale showing each group's share of total income.</p>
 
   <h3>6. Position adjustment</h3>
-  <p>The two sets of bars are arranged side-by-side on opposite sides of a central line, with the richest 10% extending to the left and the richest 0.1% extending to the right. This is a mirrored arrangement rather than a standard dodged bar chart.</p>
+  <p>The two sets of bars are arranged using a diverging layout, where values are plotted with position = "identity" and one group's values negated so the bars extend in opposite directions from a central zero line. The richest 10% extends to the left and the richest 0.1% extends to the right, creating a mirrored, diverging bar chart rather than a standard dodged bar chart.</p>
 
   <h3>7. Coordinate system &amp; faceting</h3>
-  <p>The visualisation uses a standard Cartesian coordinate system. Although the two sides may look like separate panels, they are not technically two facets; the bars are part of one combined chart with the countries listed along the centre. There is no formal faceting used.</p>
+  <p>The visualisation uses a flipped Cartesian coordinate system (coord_flip()), which turns the bars horizontal by swapping the x and y axes. Although the two sides may look like separate panels, they are not technically two facets; the bars are part of one combined chart with the countries listed along the centre. There is no formal faceting used.</p>
 
   <h2>Reference</h2>
   <p class="refs">Our World in Data. (2026). Income share of the richest 10% and the richest 0.1% of the population in each country [Data source: World Inequality Database]. <a href="https://ourworldindata.org/data-insights/what-is-the-most-unequal-country-in-south-america-it-depends-on-what-metric-you-look-at">https://ourworldindata.org/data-insights/what-is-the-most-unequal-country-in-south-america-it-depends-on-what-metric-you-look-at</a></p>
