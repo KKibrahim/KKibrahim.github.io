@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module 6 · Data Visualisation Redesign</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; color: #333; max-width: 900px; }
+    h1, h2, h3 { color: #111; }
+    .meta { font-style: italic; color: #666; margin-bottom: 20px; }
+    .image-container { margin: 20px 0; text-align: center; }
+    img { max-width: 100%; height: auto; border: 1px solid #ccc; }
+    .caption { font-size: 0.9em; color: #555; margin-top: 8px; text-align: left; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Module 6 · Data Visualisation Redesign</h1>
+  <p class="meta">Week 6 | Date: 4/10/2026</p>
+  <p><em>Note: The reproducible R script for this exercise (<code>mod6.R</code>) is saved directly in the "Module 6 - Portfolio Exercise" RMIT OneDrive folder.</em></p>
+</header>
+
+<section id="about">
+  <h2>About this exercise</h2>
+  <p>The exercise asked to take the Module 5 plot and improve its accessibility and Evergreen checklist criteria. The two fixes chosen for this exercise are updating the palette to magma with a grey missing-data background (accessibility fix) and adding comma labels to the legend along with a formal caption (Evergreen fix).</p>
+</section>
+
+<section id="visualisations">
+  <h2>Visualisation Redesign</h2>
+
+  <div class="image-container">
+    <h3>Master Visualisation</h3>
+    <img src="wsj_original.png" alt="Original Wall Street Journal heatmap graphic showing measles case counts per 100,000 across U.S. states from 1928 to 2010 with a vertical line at 1963 for vaccine introduction">
+    <p class="caption"><em>Original visualisation (DeBold & Friedman, 2015).</em></p>
+  </div>
+
+  <div class="image-container">
+    <h3>Before Redesign</h3>
+    <img src="mod5_recolour.png" alt="Heatmap showing measles cases using a viridis purple-to-yellow colour scale and full state names">
+    <p class="caption"><em>Figure 1 (Before): Initial heatmap visualization created using the wrongly built annual file, displaying raw case counts and full state names prior to rate normalization (adapted from DeBold & Friedman, 2015).</em></p>
+  </div>
+
+  <div class="image-container">
+    <h3>After Redesign</h3>
+    <img src="measles_heatmap_after.png" alt="Redesigned heatmap displaying measles incidence rates per 100,000 using the magma colour palette, state abbreviations, and grey tiles for missing data">
+    <p class="caption"><em>Figure 2 (After): Redesigned heatmap displaying incidence rates per 100,000 population using the magma colour scale, grey missing-data tiles, state abbreviations, and explicit Tycho source attribution (adapted from DeBold & Friedman, 2015).</em></p>
+  </div>
+</section>
+
+<section id="changes">
+  <h2>What I changed and why</h2>
+  <p>I rebuilt the annual data directly from the raw Tycho Level 1 file because the old pre-aggregated file showed impossible case peaks in the wrong years. I checked the rebuilt numbers and confirmed that 1950 had 301,379 total cases while 1975 dropped to 23,845 cases after the vaccine took effect. The data ends in 2002, whereas the WSJ original goes up to 2010.</p>
+  <ul>
+    <li><strong>Metric Choice (Rate per 100,000):</strong> I used incidence rate per 100,000 population instead of raw cases so large states do not look worse than smaller states just because they have more people.</li>
+    <li><strong>Magma Palette:</strong> I switched to the magma palette so lower and medium rates stand out better while staying colour-blind friendly.</li>
+    <li><strong>Grey for Missing Data (<code>na.value = "grey70"</code>):</strong> I set missing values to grey because grey means no data reported, which could be zero cases or simply no reporting from that state.</li>
+    <li><strong>Black Reference Line:</strong> I changed the 1963 vaccine line to black so it is easy to see against the dark red background cells.</li>
+    <li><strong>Legend Commas & State Abbreviations:</strong> I added commas to the legend numbers using <code>label_comma()</code> and shortened state names to 2-letter codes so the y-axis is cleaner.</li>
+    <li><strong>Caption Citation:</strong> I added the Tycho dataset citation to the bottom caption so the data source is clear.</li>
+  </ul>
+</section>
+
+<section id="datacard">
+  <h2>Data Card</h2>
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><strong>Title</strong></td>
+      <td>U.S. Measles Incidence Heatmap (1928–2002)</td>
+    </tr>
+    <tr>
+      <td><strong>Summary</strong></td>
+      <td>Annual heatmap visualising U.S. state-level measles incidence rates per 100,000 population from 1928 to 2002 using the magma colour palette, with a vertical dashed line indicating vaccine introduction in 1963.</td>
+    </tr>
+    <tr>
+      <td><strong>Data Sources</strong></td>
+      <td>van Panhuis, W. G., Willem, L., & Cross, A. (2018). Project Tycho Level 1 data: Counts of multiple diseases reported in UNITED STATES OF AMERICA, 1916-2011 (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.12608992</td>
+    </tr>
+    <tr>
+      <td><strong>Mapping</strong></td>
+      <td>Variables mapped: <code>Year</code> (derived from <code>epi_week %/% 100</code> on x-axis), <code>state</code> (2-letter postal abbreviation on y-axis), and <code>incidence_per_100000</code> (summed weekly rates represented by tile fill colour).</td>
+    </tr>
+    <tr>
+      <td><strong>Important Notes</strong></td>
+      <td>1. Uses rate per 100,000 to avoid population size bias across states.<br>2. Grey tiles explicitly mean no data reported, which could be zero cases or missing reporting.<br>3. This dataset ends in 2002, while the original WSJ chart covers years through 2010.</td>
+    </tr>
+    <tr>
+      <td><strong>Access</strong></td>
+      <td><a href="https://zenodo.org/records/12608992" target="_blank">https://zenodo.org/records/12608992</a></td>
+    </tr>
+  </table>
+</section>
+
+<section id="references">
+  <h2>References</h2>
+  <p>Anthropic. (2026). <em>Claude</em> (October 2026 version) [Large language model]. <a href="https://claude.ai" target="_blank">https://claude.ai</a></p>
+
+  <p>DeBold, T., & Friedman, D. (2015). <em>Battling infectious diseases in the 20th century: The impact of vaccines</em>. The Wall Street Journal. <a href="https://graphics.wsj.com/infectious-diseases-and-vaccines/" target="_blank">https://graphics.wsj.com/infectious-diseases-and-vaccines/</a></p>
+
+  <p>van Panhuis, W. G., Willem, L., & Cross, A. (2018). <em>Project Tycho Level 1 data: Counts of multiple diseases reported in UNITED STATES OF AMERICA, 1916-2011</em> (Version 1.0.0) [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.12608992" target="_blank">https://doi.org/10.5281/zenodo.12608992</a></p>
+</section>
+
+<section id="ai-acknowledgement">
+  <h2>AI Acknowledgement</h2>
+  <p>An AI assistant (Claude by Anthropic) was used throughout this exercise to debug R code syntax, review HTML formatting, and point out data accuracy issues, missing value handling, rate adjustments, and colour-blind palette choices. I reviewed the suggestions, ran and saved the code in RStudio, and wrote the final responses.</p>
+</section>
+
+</body>
+</html>
