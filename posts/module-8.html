@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module 8 · Spatial Mapping</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; color: #333; max-width: 900px; }
+    h1, h2, h3 { color: #111; }
+    .meta { font-style: italic; color: #666; margin-bottom: 20px; }
+    .image-container { margin: 20px 0; text-align: center; }
+    img { max-width: 100%; height: auto; border: 1px solid #ccc; }
+    .caption { font-size: 0.9em; color: #555; margin-top: 8px; text-align: left; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Module 8 · Spatial Mapping</h1>
+  <p class="meta">Week 8 | Date: 5/10/2026</p>
+  <p><em>Note: The reproducible R script for this exercise (<code>mod8.R</code>) is saved directly in the "Module 8 - Portfolio Exercise" RMIT OneDrive folder.</em></p>
+</header>
+
+<section id="about">
+  <h2>About this exercise</h2>
+  <p>Module 8 required linking tabular data to geospatial boundary files to construct a choropleth map in R. I mapped the 2021 prevalence rates of long-term mental health conditions (including depression and anxiety) across Victorian Local Government Areas (LGAs) using spatial shapefiles and health statistics from the Australian Bureau of Statistics.</p>
+</section>
+
+<section id="visualisations">
+  <h2>Visualisation</h2>
+  <div class="image-container">
+    <img src="vic_mental_health_map.png" alt="Choropleth map of Victoria displaying percentage of persons reporting long-term mental health conditions by LGA for Data year 2021 using the magma colour scale">
+    <p class="caption"><em>Figure 1: Victorian Local Government Area choropleth map displaying long-term mental health condition prevalence rates (Data year: 2021).</em></p>
+  </div>
+</section>
+
+<section id="map-findings">
+  <h2>What the map shows</h2>
+  <p>The map displays noticeable regional variation in long-term mental health reporting across Victoria. Inner-city and metropolitan Melbourne LGAs generally exhibit lower reporting percentages (appearing in lighter yellow tones), whereas higher prevalence rates appear in central Victoria and selected eastern LGAs (represented by darker purple and black shading).</p>
+</section>
+
+<section id="process">
+  <h2>What I did and why</h2>
+  <ul>
+    <li><strong>Boundary Selection:</strong> Imported the 2021 ASGS Edition 3 LGA spatial shapefile and filtered the dataset specifically to Victoria (<code>STE_NAME21 == "Victoria"</code>).</li>
+    <li><strong>Data Joining:</strong> Joined the ABS health CSV to the spatial boundaries using the matching LGA 2021 code attributes via <code>left_join()</code>.</li>
+    <li><strong>Data Cleaning:</strong> Filtered out non-geographic spatial units ("No usual address (Vic.)" and "Migratory - Offshore - Shipping (Vic.)") to isolate actual geographical boundaries, leaving 80 spatial areas (79 LGA councils plus "Unincorporated Vic").</li>
+    <li><strong>Metric Choice:</strong> Selected population percentage rates instead of raw case counts to control for large population disparities between urban and regional LGAs.</li>
+    <li><strong>Colour Palette:</strong> Applied the <code>magma</code> colour scale from the viridis package with a clean void theme (<code>theme_void()</code>) to maximize visual contrast and maintain colour-blind accessibility.</li>
+    <li><strong>Accessibility:</strong> Supported accessibility through descriptive alt text for screen readers and the perceptually uniform, colour-blind-friendly <code>magma</code> palette.</li>
+  </ul>
+</section>
+
+<section id="limitations">
+  <h2>Limits</h2>
+  <p>A primary limitation of this choropleth map is large area prominence: geographically expansive rural LGAs dominate the map visually, whereas small, high-density metropolitan LGAs around Greater Melbourne are difficult to inspect without zooming or inset panels.</p>
+</section>
+
+<section id="datacard">
+  <h2>Data Card</h2>
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><strong>Title</strong></td>
+      <td>Victorian LGA Mental Health Condition Prevalence (2021)</td>
+    </tr>
+    <tr>
+      <td><strong>Summary</strong></td>
+      <td>Choropleth map displaying the percentage of persons reporting long-term mental health conditions (depression or anxiety) across Victorian Local Government Areas for Data year 2021.</td>
+    </tr>
+    <tr>
+      <td><strong>Data Sources</strong></td>
+      <td>
+        1. Australian Bureau of Statistics. (2021). <em>Local Government Areas - Australian Statistical Geography Standard (ASGS) Edition 3</em> [Data set]. ABS. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files" target="_blank">https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files</a><br><br>
+        2. Australian Bureau of Statistics. (2025). <em>ABS Health and disability (Data by region) LGA November 2025</em> [Data set]. Digital Atlas of Australia. <a href="https://digital.atlas.gov.au/datasets/812805165f4046419f7e5a0c1f933526_0" target="_blank">https://digital.atlas.gov.au/datasets/812805165f4046419f7e5a0c1f933526_0</a>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Mapping</strong></td>
+      <td>Variables mapped: <code>geometry</code> (LGA boundaries) and <code>Mental health condition (%)</code> (fill colour intensity).</td>
+    </tr>
+    <tr>
+      <td><strong>Important Notes</strong></td>
+      <td>Non-spatial council categories ("No usual address" and "Migratory/Offshore") were removed prior to plotting to ensure valid spatial rendering across all 80 Victorian spatial areas (79 LGA councils plus "Unincorporated Vic"). Data year: 2021.</td>
+    </tr>
+    <tr>
+      <td><strong>Access</strong></td>
+      <td>
+        Boundary shapefile download: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files" target="_blank">ABS ASGS Edition 3 Digital Boundaries</a><br>
+        Health CSV layer download: <a href="https://digital.atlas.gov.au/datasets/812805165f4046419f7e5a0c1f933526_0" target="_blank">Digital Atlas of Australia Health Layer</a>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<section id="references">
+  <h2>References</h2>
+  <p>Anthropic. (2026). <em>Claude</em> [LLM]. <a href="https://claude.ai" target="_blank">https://claude.ai</a></p>
+
+  <p>Australian Bureau of Statistics. (2021). <em>Local Government Areas - Australian Statistical Geography Standard (ASGS) Edition 3</em> [Data set]. ABS. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files" target="_blank">https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files</a></p>
+
+  <p>Australian Bureau of Statistics. (2025). <em>ABS Health and disability (Data by region) LGA November 2025</em> [Data set]. Digital Atlas of Australia. <a href="https://digital.atlas.gov.au/datasets/812805165f4046419f7e5a0c1f933526_0" target="_blank">https://digital.atlas.gov.au/datasets/812805165f4046419f7e5a0c1f933526_0</a></p>
+
+</section>
+
+<section id="ai-acknowledgement">
+  <h2>AI Acknowledgement</h2>
+  <p>AI assistants was used during this exercise: Anthropic's Claude. I provided the initial project direction, suggesting Victorian LGAs as the focus, selecting the ABS boundary and Digital Atlas data layers, and defining the step-by-step procedure. Claude provided assistance with the <code>sf</code> package functions, including spatial filtering syntax, and setting up the <code>left_join()</code> between the shapefile and CSV data.</p>
+</section>
+
+</body>
+</html>
